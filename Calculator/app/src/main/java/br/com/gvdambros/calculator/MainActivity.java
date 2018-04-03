@@ -8,8 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText ptEnterPercentage, ptEnterNumber;
+    TextView tvResult;
+    Button btnCalculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +25,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ptEnterPercentage = (EditText) findViewById(R.id.ptEnterPercentage);
+        ptEnterNumber = (EditText) findViewById(R.id.ptEnterNumber);
+        btnCalculate = (Button) findViewById(R.id.btnCalculate);
+        tvResult = (TextView) findViewById(R.id.tvResult);
+
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float percentage = Float.parseFloat(ptEnterPercentage.getText().toString());
+                float number = Float.parseFloat(ptEnterNumber.getText().toString());
+                tvResult.setText("Result: " + Float.toString(percentage * number/100.0f));
+
+            }
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
